@@ -19,7 +19,7 @@ func NewJPEGReader(toRead io.Reader) *JPEGReader {
 	return &JPEGReader{io.Reader(toRead), new(bytes.Buffer)}
 }
 
-func (r *JPEGReader) ReadImage() (img image.Image, err error) {
+func (r *JPEGReader) ReadImage() (img *image.Image, err error) {
 //	jpeg_header := []byte{0xff, 0xd8}
 	jpeg_footer := []byte{0xff, 0xd9}
 	for {
@@ -75,7 +75,7 @@ func (r *JPEGReader) ReadImage() (img image.Image, err error) {
 //			fmt.Printf("%v bytes for next read\n", r.buf.Len())
 //			fmt.Printf("Next bytes are %x\n", buf_bytes[footer_index + 2:footer_index + 4])
 
-			return img, err
+			return &img, err
 		}
 	}
 
